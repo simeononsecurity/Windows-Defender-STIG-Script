@@ -1,7 +1,7 @@
 # Windows-Defender-STIG-Script
 
 ## STIGS/SRGs Applied:
-- [Windows Defender Antivirus V1R9](https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_MS_Windows_Defender_Antivirus_V1R9_STIG.zip)
+- [Windows Defender Antivirus V2R1](https://dl.cyber.mil/stigs/zip/U_MS_Windows_Defender_Antivirus_V2R1_STIG.zip)
 
 ## Download the required files:
 
