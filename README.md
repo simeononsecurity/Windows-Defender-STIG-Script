@@ -6,7 +6,10 @@ We now offer a playbook collection for this script. Please see the following:
 - [Ansible Galaxy](https://galaxy.ansible.com/simeononsecurity/windows_stigs)
 
 ## STIGS/SRGs Applied:
-- [Windows Defender Antivirus V2R1](https://dl.cyber.mil/stigs/zip/U_MS_Windows_Defender_Antivirus_V2R1_STIG.zip)
+- [Windows Defender Antivirus](https://dl.cyber.mil/stigs/zip/U_MS_Windows_Defender_Antivirus_V2R1_STIG.zip)
+
+## Recommended reading:
+- [Microsoft - WDSI Defender Updates](https://www.microsoft.com/en-us/wdsi/defenderupdates)
 
 ## Download the required files:
 
