@@ -1,5 +1,7 @@
 # Windows-Defender-STIG-Script
 
+[![VirusTotal Scan](https://github.com/simeononsecurity/Windows-Defender-STIG-Script/actions/workflows/virustotal.yml/badge.svg)](https://github.com/simeononsecurity/Windows-Defender-STIG-Script/actions/workflows/virustotal.yml)
+
 ## Ansible:
 We now offer a playbook collection for this script. Please see the following:
 - [Github Repo](https://github.com/simeononsecurity/Windows_STIG_Ansible)
