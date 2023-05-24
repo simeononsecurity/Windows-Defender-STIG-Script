@@ -1,15 +1,23 @@
 # Set error action preference to continue
 $ErrorActionPreference = 'Continue'
 
-# Elevate privileges for this process
-Write-Output "Elevating privileges for this process"
-Start-Process -FilePath "$PSHOME\powershell.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `"cd '$PSScriptRoot'; & '$PSCommandPath'`"" -Verb RunAs
+# Check if already elevated
+$elevated = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+
+if (-not $elevated) {
+    # Elevate privileges for this process
+    Write-Output "Elevating privileges for this process"
+    $elevatedScriptPath = $MyInvocation.MyCommand.Definition
+    Start-Process -FilePath "$PSHOME\powershell.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `"& '$elevatedScriptPath'`"" -Verb RunAs
+    exit
+}
 
 # Set directory to script root
-Set-Location -Path $PSScriptRoot
+$scriptRoot = Split-Path -Path $MyInvocation.MyCommand.Path -Parent
+Set-Location -Path $scriptRoot
 
 # Copy Windows Defender configuration files
-$defenderConfigSource = Join-Path $PSScriptRoot 'Files\Windows Defender Configuration Files'
+$defenderConfigSource = Join-Path $scriptRoot 'Files\Windows Defender Configuration Files'
 $defenderConfigDestination = 'C:\temp\Windows Defender'
 Write-Host "Copying Windows Defender Configuration Files..." -ForegroundColor White -BackgroundColor Black
 mkdir $defenderConfigDestination -ErrorAction SilentlyContinue | Out-Null
@@ -21,8 +29,8 @@ Write-Host "Enabling Windows Defender Exploit Protection..." -ForegroundColor Gr
 Set-ProcessMitigation -PolicyFilePath $exploitProtectionConfig
 
 # Import Windows Defender GPOs
-$gpoPath = Join-Path $PSScriptRoot 'Files\GPO'
+$gpoPath = Join-Path $scriptRoot 'Files\GPO'
 Write-Host "Importing Windows Defender GPOs..." -ForegroundColor Green -BackgroundColor Black
-& "$PSScriptRoot\Files\LGPO\LGPO.exe" /g $gpoPath
+& "$scriptRoot\Files\LGPO\LGPO.exe" /g $gpoPath
 
 Write-Host "Done..." -ForegroundColor Green -BackgroundColor Black
