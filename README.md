@@ -23,3 +23,4 @@ Download the required files from the [GitHub Repository](https://github.com/sime
 ```
 .\sos-windowsdefenderstig.ps1
 ```
+## Learn more about [Applying Windows Defender STIGs](https://simeononsecurity.ch/github/Windows-Defender-STIG-Script)
